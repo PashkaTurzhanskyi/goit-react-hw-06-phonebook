@@ -18,19 +18,22 @@ export const ContactForm = () => {
     name === 'number' && setNumber(value);
   };
 
+  const formReset = () => {
+    setName('');
+    setNumber('');
+  };
+
   const formSubmitHandler = data => {
     contacts.some(
       contact => contact.name.toLowerCase() === data.name.toLowerCase()
     )
       ? alert(`${data.name} is already in contacts`)
-      : dispatch(addContact({ name, number }));
+      : dispatch(addContact({ name, number })) && formReset();
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     formSubmitHandler({ name, number });
-    setName('');
-    setNumber('');
   };
 
   return (
